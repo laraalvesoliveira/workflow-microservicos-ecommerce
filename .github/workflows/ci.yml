@@ -1,0 +1,25 @@
+name: CI - Workflow Microsserviços
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validar-projeto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Validar estrutura do projeto
+        run: |
+          echo "Validando estrutura de microsserviços..."
+          test -d catalogo-service
+          test -d pedido-service
+          test -d pagamento-service
+          test -d entrega-service
+          test -d api-gateway
+          echo "Estrutura validada com sucesso!"
